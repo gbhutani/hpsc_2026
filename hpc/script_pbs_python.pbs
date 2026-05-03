@@ -1,0 +1,16 @@
+#!/bin/bash 
+#PBS -q privse
+#PBS -o out.o
+#PBS -e out.e
+#PBS -N demo_me522_python
+#PBS -l nodes=1:ppn=1
+#PBS -l walltime=00:02:00 
+#PBS -V
+
+cd ${PBS_O_WORKDIR} # to make sure that we are in the right dir on compute node
+echo "Running on: " # on standard output
+cat ${PBS_NODEFILE} # env variable for file name containing node details
+cat $PBS_NODEFILE > machines.list # also on machines.list file
+echo "Program Output begins: "
+source ~/virtualenvs/venv123/bin/activate # to enable venv on compute node. try without this command too
+python python_script.py
